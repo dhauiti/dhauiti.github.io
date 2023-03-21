@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Dynamic SVG Web Object</title>
+    <title>Dynamic Image Web Object</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
       $(document).ready(function() {
         var sheetId = "1PmeKXfwQtY1_Oiy3nnBomQrir1tYX306K8FpMVSC9eg"; // replace with your Google Sheet ID
-        var cellId = "A1"; // the cell containing the SVG URL
+        var cellId = "A1"; // the cell containing the image URL
         var apiKey = "AIzaSyCz4atzVNaOzT_ocbARhPwFi6pkRtxGpJ8"; // replace with your API key
         var apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId + "/values/" + cellId + "?key=" + apiKey;
         
@@ -15,10 +15,12 @@
           url: apiUrl,
           method: "GET",
           success: function(data) {
-            var svgUrl = data.values[0][0];
-            $.get(svgUrl, function(svgData) {
-              $('#dynamic-svg').html(svgData.documentElement.outerHTML);
-            });
+            var imageUrl = data.values[0][0];
+            var image = new Image();
+            image.src = imageUrl;
+            image.onload = function() {
+              $('#dynamic-image').attr('src', imageUrl);
+            };
           },
           error: function(error) {
             console.log(error);
@@ -28,6 +30,6 @@
     </script>
   </head>
   <body>
-    <div id="dynamic-svg"></div>
+    <img id="dynamic-image" alt="Dynamic Image">
   </body>
 </html>
