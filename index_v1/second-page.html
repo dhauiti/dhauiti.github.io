@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Second Page</title>
+  </head>
+  <body>
+    <h1>Welcome to the Second Page</h1>
+    <button onclick="location.href='index.html'">Go back to Home Page</button>
+    <script>
+      // Get the iframe content from sessionStorage
+      var iframeContent = sessionStorage.getItem('iframeContent');
+
+      // Create a hidden div on the second-page.html page
+      var container = document.createElement('div');
+      container.style.display = 'none';
+      container.innerHTML = iframeContent;
+      document.body.appendChild(container);
+
+      function onIframeLoad() {
+        // The web app is loaded, and its resources are cached in the browser
+      }
+
+      // Wait for the iframe to load before adding the event listener
+      var iframe = document.querySelector('#my-iframe');
+      iframe.addEventListener('load', onIframeLoad);
+    </script>
+  </body>
+</html>

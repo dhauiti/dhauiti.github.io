@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var iframe = document.createElement('iframe');
+        iframe.id = 'my-iframe';
+        iframe.style.display = 'inline';
+        iframe.src = 'proxy.php?url=https://script.google.com/a/macros/primaryconnect.com.au/s/AKfycbzKhEBsqhg9KT54BcUOV_XkfbWgJzWSAolbcvZSnLe8JYSCtdNnfRThm1xsgPR64k2F/exec?sheetName=MLDC&type=carousel';
+        document.body.appendChild(iframe);
+        console.log('Iframe source:', iframe.src);
+
+        iframe.addEventListener('load', function() {
+          console.log("Iframe content has loaded.");
+          // The web app is loaded, and its resources are cached in the browser
+
+          // Store the iframe content in sessionStorage and pass it to the second page
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', iframe.src);
+          xhr.onload = function() {
+            console.log("Iframe content has been retrieved.");
+            sessionStorage.setItem('iframeContent', xhr.responseText);
+            var secondPageLink = document.querySelector("button");
+            secondPageLink.href = "second-page.html";
+          };
+          xhr.onerror = function() {
+            console.error("Failed to retrieve iframe content.");
+          };
+          xhr.send();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to the Home Page</h1>
+    <button onclick="location.href='second-page.html'">Go to Second Page</button>
+  </body>
+</html>
