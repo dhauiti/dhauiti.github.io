@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <link rel="preload" href="https://script.google.com/a/macros/primaryconnect.com.au/s/AKfycbzKhEBsqhg9KT54BcUOV_XkfbWgJzWSAolbcvZSnLe8JYSCtdNnfRThm1xsgPR64k2F/exec?sheetName=MLDC&type=carousel" as="fetch">
+  </head>
+  <body>
+    <h1>Welcome to the Home Page</h1>
+    <button onclick="location.href='second-page.html'">Go to Second Page</button>
+    <script>
+      setTimeout(() => {
+        fetch('https://script.google.com/a/macros/primaryconnect.com.au/s/AKfycbzKhEBsqhg9KT54BcUOV_XkfbWgJzWSAolbcvZSnLe8JYSCtdNnfRThm1xsgPR64k2F/exec?sheetName=MLDC&type=carousel')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+      }, 10000);
+    </script>
+  </body>
+</html>
